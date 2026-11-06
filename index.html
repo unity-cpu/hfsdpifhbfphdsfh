@@ -141,6 +141,34 @@
       width: 32px;
       height: 32px;
     }
+
+    /* --- Server status indicator --- */
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .status-dot.online {
+      background: #4ade80;
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+      animation: statusPulse 2s infinite;
+    }
+    .status-dot.offline {
+      background: #f87171;
+      box-shadow: none;
+    }
+    .status-dot.maintenance {
+      background: #fbbf24;
+      box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
+      animation: statusPulse 2s infinite;
+    }
+    @keyframes statusPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
+      70%  { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+    }
   </style>
 </head>
 <body class="bg-milk-950 text-white overflow-x-hidden antialiased">
@@ -158,7 +186,6 @@
         <div class="leading-none">
           <div class="font-bold text-[15px] tracking-wide">MILK<span class="text-accent">TAG</span></div>
         </div>
-      </a>
 
       <div class="hidden md:flex items-center gap-8 text-[13px] font-medium text-white/70">
         <a href="#news" class="nav-link hover:text-white transition">News</a>
@@ -168,15 +195,26 @@
         <a href="#discord" class="nav-link hover:text-white transition">Discord</a>
       </div>
 
-      <a href="#download" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-accent/40 text-accent text-sm font-medium hover:bg-accent/10 transition">
-        Get in the game
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-      </a>
+      <div class="flex items-center gap-3">
+        <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/70">
+          <span id="navStatusDot" class="status-dot offline"></span>
+          <span id="navStatusText">Checking…</span>
+        </div>
 
-      <button id="menuBtn" class="md:hidden text-accent text-xl">☰</button>
+        <a href="#download" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-accent/40 text-accent text-sm font-medium hover:bg-accent/10 transition">
+          Get in the game
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+
+        <button id="menuBtn" class="md:hidden text-accent text-xl">☰</button>
+      </div>
     </div>
 
     <div id="mobileMenu" class="hidden md:hidden bg-milk-900/95 backdrop-blur-xl border-t border-white/5 px-6 py-5 space-y-4">
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/70 w-fit">
+        <span id="mobileStatusDot" class="status-dot offline"></span>
+        <span id="mobileStatusText">Checking…</span>
+      </div>
       <a href="#news" class="block text-white/80 hover:text-accent">News</a>
       <a href="#staff" class="block text-white/80 hover:text-accent">Staff</a>
       <a href="#leaderboard" class="block text-white/80 hover:text-accent">Leaderboard</a>
@@ -205,6 +243,12 @@
         <a href="#discord" class="btn-ghost inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm">
           Join Discord
         </a>
+      </div>
+
+      <!-- Live server status -->
+      <div class="mt-8 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/60">
+        <span id="heroStatusDot" class="status-dot offline"></span>
+        <span id="heroStatusText">Checking servers…</span>
       </div>
 
       <p class="mt-12 text-[11px] text-white/30 tracking-widest uppercase">
@@ -236,83 +280,82 @@
   </section>
 
   <!-- Staff -->
-<!-- Staff -->
-<section id="staff" class="relative py-28 px-6">
-  <div class="max-w-5xl mx-auto">
-    <div class="text-center mb-16 reveal">
-      <p class="text-accent text-xs font-medium tracking-widest uppercase mb-3">The Team</p>
-      <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Staff</h2>
-      <p class="text-white/40 mt-3 text-sm">the people who keep Milk Tag running</p>
+  <section id="staff" class="relative py-28 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="text-accent text-xs font-medium tracking-widest uppercase mb-3">The Team</p>
+        <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Staff</h2>
+        <p class="text-white/40 mt-3 text-sm">the people who keep Milk Tag running</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- Founders -->
+        <div class="card rounded-2xl p-7 text-center reveal">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 p-[2px]">
+          </div>
+          <h3 class="font-bold mb-1">Founders</h3>
+          <p class="text-accent text-sm font-medium">unity ·milk · techno</p>
+          <p class="text-white/30 text-xs mt-1">Founder</p>
+        </div>
+
+        <!-- Co Founders -->
+        <div class="card rounded-2xl p-7 text-center reveal" style="transition-delay:0.05s">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 p-[2px]">
+          </div>
+          <h3 class="font-bold mb-1">Co Founders</h3>
+          <p class="text-accent text-sm font-medium">cat</p>
+          <p class="text-white/30 text-xs mt-1">Co Founder</p>
+        </div>
+
+        <!-- Owners -->
+        <div class="card rounded-2xl p-7 text-center reveal" style="transition-delay:0.1s">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 p-[2px]">
+          </div>
+          <h3 class="font-bold mb-1">Owners</h3>
+          <p class="text-accent text-sm font-medium">bunny · mrsandman</p>
+          <p class="text-white/30 text-xs mt-1">Owner</p>
+        </div>
+
+        <!-- Head Administrator -->
+        <div class="card rounded-2xl p-7 text-center reveal" style="transition-delay:0.15s">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-500 to-orange-500 p-[2px]">
+          </div>
+          <h3 class="font-bold mb-1">Head Administrator</h3>
+          <p class="text-accent text-sm font-medium">awsomefrog</p>
+          <p class="text-white/30 text-xs mt-1">Head Admin</p>
+        </div>
+
+        <!-- Administrators -->
+        <div class="card rounded-2xl p-7 text-center reveal" style="transition-delay:0.2s">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 p-[2px]">
+          </div>
+          <h3 class="font-bold mb-1">Administrators</h3>
+          <p class="text-accent text-sm font-medium">bumblebee · kiwi son · faded · wheather</p>
+          <p class="text-white/30 text-xs mt-1">Administrator</p>
+        </div>
+
+        <!-- Head Moderator -->
+        <div class="card rounded-2xl p-7 text-center reveal" style="transition-delay:0.25s">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 p-[2px]">
+          </div>
+          <h3 class="font-bold mb-1">Head Moderator</h3>
+          <p class="text-accent text-sm font-medium">kinesi</p>
+          <p class="text-white/30 text-xs mt-1">Head Moderator</p>
+        </div>
+
+        <!-- Moderators -->
+        <div class="card rounded-2xl p-7 text-center reveal sm:col-span-2 lg:col-span-3" style="transition-delay:0.3s">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 p-[2px]">
+          </div>
+          <h3 class="font-bold mb-1">Moderators</h3>
+          <p class="text-accent text-sm font-medium">kinesi · kiwi · why · wofa · rem · frosted</p>
+          <p class="text-white/30 text-xs mt-1">Moderator</p>
+        </div>
+
+      </div>
     </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
-      <!-- Founders -->
-      <div class="card rounded-2xl p-7 text-center reveal">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 p-[2px]">
-        </div>
-        <h3 class="font-bold mb-1">Founders</h3>
-        <p class="text-accent text-sm font-medium">unity ·milk · techno</p>
-        <p class="text-white/30 text-xs mt-1">Founder</p>
-      </div>
-
-      <!-- Co Founders -->
-      <div class="card rounded-2xl p-7 text-center reveal" style="transition-delay:0.05s">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 p-[2px]">
-        </div>
-        <h3 class="font-bold mb-1">Co Founders</h3>
-        <p class="text-accent text-sm font-medium">cat</p>
-        <p class="text-white/30 text-xs mt-1">Co Founder</p>
-      </div>
-
-      <!-- Owners -->
-      <div class="card rounded-2xl p-7 text-center reveal" style="transition-delay:0.1s">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 p-[2px]">
-        </div>
-        <h3 class="font-bold mb-1">Owners</h3>
-        <p class="text-accent text-sm font-medium">bunny · mrsandman</p>
-        <p class="text-white/30 text-xs mt-1">Owner</p>
-      </div>
-
-      <!-- Head Administrator -->
-      <div class="card rounded-2xl p-7 text-center reveal" style="transition-delay:0.15s">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-500 to-orange-500 p-[2px]">
-        </div>
-        <h3 class="font-bold mb-1">Head Administrator</h3>
-        <p class="text-accent text-sm font-medium">awsomefrog</p>
-        <p class="text-white/30 text-xs mt-1">Head Admin</p>
-      </div>
-
-      <!-- Administrators -->
-      <div class="card rounded-2xl p-7 text-center reveal" style="transition-delay:0.2s">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 p-[2px]">
-        </div>
-        <h3 class="font-bold mb-1">Administrators</h3>
-        <p class="text-accent text-sm font-medium">bumblebee · kiwi son · faded · wheather</p>
-        <p class="text-white/30 text-xs mt-1">Administrator</p>
-      </div>
-
-      <!-- Head Moderator -->
-      <div class="card rounded-2xl p-7 text-center reveal" style="transition-delay:0.25s">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 p-[2px]">
-        </div>
-        <h3 class="font-bold mb-1">Head Moderator</h3>
-        <p class="text-accent text-sm font-medium">kinesi</p>
-        <p class="text-white/30 text-xs mt-1">Head Moderator</p>
-      </div>
-
-      <!-- Moderators -->
-      <div class="card rounded-2xl p-7 text-center reveal sm:col-span-2 lg:col-span-3" style="transition-delay:0.3s">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 p-[2px]">
-        </div>
-        <h3 class="font-bold mb-1">Moderators</h3>
-        <p class="text-accent text-sm font-medium">kinesi · kiwi · why · wofa · rem · frosted</p>
-        <p class="text-white/30 text-xs mt-1">Moderator</p>
-      </div>
-
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- Leaderboard -->
   <section id="leaderboard" class="relative py-28 px-6">
@@ -483,6 +526,45 @@
 
     // Initial render
     renderLeaderboard('ground');
+
+    // ===== Live server status =====
+    const STATUS_ENDPOINT = 'https://withered-hill-1c9b.biggercreator22.workers.dev/';
+
+    function paintStatus(status, message) {
+      const targets = [
+        ['navStatusDot', 'navStatusText'],
+        ['heroStatusDot', 'heroStatusText'],
+        ['mobileStatusDot', 'mobileStatusText'],
+      ];
+      const label = message || status;
+
+      targets.forEach(([dotId, textId]) => {
+        const dot = document.getElementById(dotId);
+        const text = document.getElementById(textId);
+        if (dot) dot.className = 'status-dot ' + status;
+        if (text) text.textContent = label;
+      });
+    }
+
+    async function checkServerStatus() {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 6000);
+
+      try {
+        const res = await fetch(STATUS_ENDPOINT, { signal: controller.signal });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        paintStatus(data.status || 'offline', data.message);
+      } catch (err) {
+        console.warn('Status check failed:', err);
+        paintStatus('offline', 'Servers Offline');
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+
+    checkServerStatus();
+    setInterval(checkServerStatus, 60000);
   </script>
 </body>
 </html>
