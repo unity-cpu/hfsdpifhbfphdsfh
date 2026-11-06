@@ -155,14 +155,6 @@
   <!-- Navbar -->
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="#home" class="flex items-center gap-2.5 group">
-        <svg class="logo-icon text-accent" viewBox="0 0 40 40" fill="none">
-          <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
-          <circle cx="14" cy="16" r="2.5" fill="currentColor"/>
-          <circle cx="26" cy="16" r="2.5" fill="currentColor"/>
-          <path d="M13 25c2 3 5 4.5 7 4.5s5-1.5 7-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <path d="M8 12c1.5-2 3-3 5-3M32 12c-1.5-2-3-3-5-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
         <div class="leading-none">
           <div class="font-bold text-[15px] tracking-wide">MILK<span class="text-accent">TAG</span></div>
         </div>
@@ -473,7 +465,7 @@
         return `<div class="lb-row grid grid-cols-12 gap-2 px-6 py-3.5 items-center transition">
           <div class="col-span-2 ${rankClass}">#${rank}</div>
           <div class="col-span-10 flex items-center gap-3">
-            <div class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-xs">🦍</div>
+          <div class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-xs"></div>
             <span class="font-medium text-sm">${name}</span>
           </div>
         </div>`;
