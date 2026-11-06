@@ -1,0 +1,80 @@
+# ==========================================
+# AI CRAWLERS: BLOCKED
+# ==========================================
+
+# OpenAI
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+# Google AI (does not affect Search)
+User-agent: Google-Extended
+Disallow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Disallow: /
+
+# Common Crawl (used by many AI labs)
+User-agent: CCBot
+Disallow: /
+
+# ByteDance
+User-agent: Bytespider
+Disallow: /
+
+# Meta
+User-agent: meta-externalagent
+Disallow: /
+
+# Apple AI
+User-agent: Applebot-Extended
+Disallow: /
+
+# Cohere
+User-agent: cohere-ai
+Disallow: /
+
+# Diffbot
+User-agent: Diffbot
+Disallow: /
+
+# Webz.io
+User-agent: Omgilibot
+Disallow: /
+
+# xAI / Grok
+User-agent: GrokBot
+Disallow: /
+
+User-agent: xAI-Grok
+Disallow: /
+
+User-agent: xAI-SearchBot
+Disallow: /
+
+User-agent: xAI-Bot
+Disallow: /
+
+# ==========================================
+# SEARCH ENGINES: ALLOWED
+# ==========================================
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://milk-tagg.vercel.app/sitemap.xml
