@@ -133,24 +133,6 @@
     .status-dot.offline { background: #6b7280; }
     .status-dot.idle { background: #fbbf24; }
     .status-dot.dnd { background: #f87171; }
-
-    /* Small dot for staff list */
-    .staff-dot {
-      width: 6px;
-      height: 6px;
-      min-width: 6px;      /* Prevents squishing */
-      min-height: 6px;     /* Prevents squishing */
-      border-radius: 50%;
-      display: inline-block;
-      flex-shrink: 0;      /* Crucial fix for flex containers */
-      margin-left: 4px;
-      background: #4b5563;
-      transition: background-color 0.3s;
-    }
-    .staff-dot.online { background: #4ade80; box-shadow: 0 0 5px rgba(74, 222, 128, 0.8); }
-    .staff-dot.idle { background: #fbbf24; }
-    .staff-dot.dnd { background: #f87171; }
-    .staff-dot.offline { background: #4b5563; }
   </style>
 </head>
 <body class="bg-milk-950 text-white overflow-x-hidden antialiased">
@@ -267,69 +249,87 @@
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Founders -->
         <div class="card rounded-2xl p-8 text-center reveal">
           <h3 class="font-bold text-lg mb-1">Founders</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-2 flex-wrap">
-            <span class="flex items-center gap-1">unity <span id="dot-unity" class="staff-dot offline">|</span></span> 
-            <span class="flex items-center gap-1">milk <span id="dot-milk" class="staff-dot offline">|</span></span> 
-            <span class="flex items-center gap-1">techno <span id="dot-techno" class="staff-dot offline">|</span></span>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5 flex-wrap">
+            <span class="flex items-center gap-1.5">unity <span id="dot-unity" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span> 
+            <span class="text-white/20 px-1">|</span>
+            <span class="flex items-center gap-1.5">milk <span id="dot-milk" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span> 
+            <span class="text-white/20 px-1">|</span>
+            <span class="flex items-center gap-1.5">techno <span id="dot-techno" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span>
           </p>
           <p class="text-white/30 text-xs mt-2">Founder</p>
         </div>
 
+        <!-- Co Founders -->
         <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.05s">
           <h3 class="font-bold text-lg mb-1">Co Founders</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1">
-            cat <span id="dot-cat" class="staff-dot offline">|</span>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5">
+            cat <span id="dot-cat" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span>
           </p>
           <p class="text-white/30 text-xs mt-2">Co Founder</p>
         </div>
 
+        <!-- Owners -->
         <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.1s">
           <h3 class="font-bold text-lg mb-1">Owners</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-2 flex-wrap">
-            <span class="flex items-center gap-1">bunny <span id="dot-bunny" class="staff-dot offline">|</span></span> 
-            <span class="flex items-center gap-1">mrsandman <span id="dot-mrsandman" class="staff-dot offline">|</span></span>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5 flex-wrap">
+            <span class="flex items-center gap-1.5">bunny <span id="dot-bunny" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span> 
+            <span class="text-white/20 px-1">|</span>
+            <span class="flex items-center gap-1.5">mrsandman <span id="dot-mrsandman" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span>
           </p>
           <p class="text-white/30 text-xs mt-2">Owner</p>
         </div>
 
+        <!-- Head Administrator -->
         <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.15s">
           <h3 class="font-bold text-lg mb-1">Head Administrator</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1">
-            awsomefrog <span id="dot-awsomefrog" class="staff-dot offline"></span>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5">
+            awsomefrog <span id="dot-awsomefrog" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span>
           </p>
           <p class="text-white/30 text-xs mt-2">Head Admin</p>
         </div>
 
+        <!-- Administrators -->
         <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.2s">
           <h3 class="font-bold text-lg mb-1">Administrators</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-2 flex-wrap">
-            <span class="flex items-center gap-1">bumblebee <span id="dot-bumblebee" class="staff-dot offline">|</span></span> 
-            <span class="flex items-center gap-1">kiwi son <span id="dot-kiwison" class="staff-dot offline">|</span></span> 
-            <span class="flex items-center gap-1">faded <span id="dot-faded" class="staff-dot offline"></span>|</span> 
-            <span class="flex items-center gap-1">wheather <span id="dot-wheather" class="staff-dot offline">|</span></span>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5 flex-wrap">
+            <span class="flex items-center gap-1.5">bumblebee <span id="dot-bumblebee" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span> 
+            <span class="text-white/20 px-1">|</span>
+            <span class="flex items-center gap-1.5">kiwi son <span id="dot-kiwison" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span> 
+            <span class="text-white/20 px-1">|</span>
+            <span class="flex items-center gap-1.5">faded <span id="dot-faded" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span> 
+            <span class="text-white/20 px-1">|</span>
+            <span class="flex items-center gap-1.5">wheather <span id="dot-wheather" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span>
           </p>
           <p class="text-white/30 text-xs mt-2">Administrator</p>
         </div>
 
+        <!-- Head Moderator -->
         <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.25s">
           <h3 class="font-bold text-lg mb-1">Head Moderator</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1">
-            kinesi <span id="dot-kinesi" class="staff-dot offline">|</span>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5">
+            kinesi <span id="dot-kinesi" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span>
           </p>
           <p class="text-white/30 text-xs mt-2">Head Moderator</p>
         </div>
 
+        <!-- Moderators -->
         <div class="card rounded-2xl p-8 text-center reveal sm:col-span-2 lg:col-span-3" style="transition-delay:0.3s">
           <h3 class="font-bold text-lg mb-1">Moderators</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-2 flex-wrap">
-            <span class="flex items-center gap-1">kinesi <span id="dot-kinesi2" class="staff-dot offline">|</span></span> 
-            <span class="flex items-center gap-1">kiwi <span id="dot-kiwi" class="staff-dot offline">|</span></span> 
-            <span class="flex items-center gap-1">why <span id="dot-why" class="staff-dot offline">|</span></span> 
-            <span class="flex items-center gap-1">wofa <span id="dot-wofa" class="staff-dot offline">|</span></span> 
-            <span class="flex items-center gap-1">rem <span id="dot-rem" class="staff-dot offline">|</span></span> 
-            <span class="flex items-center gap-1">frosted <span id="dot-frosted" class="staff-dot offline">|</span></span>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5 flex-wrap">
+            <span class="flex items-center gap-1.5">kinesi <span id="dot-kinesi2" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span> 
+            <span class="text-white/20 px-1">|</span>
+            <span class="flex items-center gap-1.5">kiwi <span id="dot-kiwi" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span> 
+            <span class="text-white/20 px-1">|</span>
+            <span class="flex items-center gap-1.5">why <span id="dot-why" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span> 
+            <span class="text-white/20 px-1">|</span>
+            <span class="flex items-center gap-1.5">wofa <span id="dot-wofa" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span> 
+            <span class="text-white/20 px-1">|</span>
+            <span class="flex items-center gap-1.5">rem <span id="dot-rem" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span> 
+            <span class="text-white/20 px-1">|</span>
+            <span class="flex items-center gap-1.5">frosted <span id="dot-frosted" class="w-2 h-2 rounded-full inline-block flex-shrink-0 bg-gray-500"></span></span>
           </p>
           <p class="text-white/30 text-xs mt-2">Moderator</p>
         </div>
@@ -437,10 +437,12 @@
       discord:  'https://discord.gg/milktag',          
     };
 
-    // 👇 1. PUT YOUR PYTHON BOT'S URL HERE (e.g. https://mybot.up.railway.app/status) 👇
+    // 👇 1. PUT YOUR PYTHON BOT'S URL HERE 👇
+    // If testing on your PC, use: 'http://localhost:8080/status'
+    // If hosting on Render/Railway, use your link: 'https://your-bot.onrender.com/status'
     const BOT_API_URL = 'http://localhost:8080/status'; 
 
-    // 👇 2. PUT YOUR STAFF'S DISCORD IDS HERE (Right click profile -> Copy User ID) 👇
+    // 👇 2. YOUR STAFF'S DISCORD IDS 👇
     const STAFF_IDS = {
     unity: "739492035555491841",
     milk: "1238518459613188106",
@@ -564,16 +566,23 @@
       try {
         const res = await fetch(BOT_API_URL);
         const data = await res.json(); 
-        // data looks like: { "123456789": "online", "987654321": "offline" }
 
         for (const [name, id] of Object.entries(STAFF_IDS)) {
           let status = data[id] || 'offline'; 
           
+          // Choose color based on status
+          let colorClasses = 'bg-gray-500'; // offline
+          if (status === 'online') colorClasses = 'bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.8)]';
+          else if (status === 'idle') colorClasses = 'bg-yellow-400';
+          else if (status === 'dnd') colorClasses = 'bg-red-400';
+
+          const baseClasses = 'w-2 h-2 rounded-full inline-block flex-shrink-0';
+          
           const dot1 = document.getElementById(`dot-${name}`);
           const dot2 = document.getElementById(`dot-${name}2`);
           
-          if (dot1) dot1.className = `staff-dot ${status}`;
-          if (dot2) dot2.className = `staff-dot ${status}`;
+          if (dot1) dot1.className = `${baseClasses} ${colorClasses}`;
+          if (dot2) dot2.className = `${baseClasses} ${colorClasses}`;
         }
       } catch (err) {
         // Silently fail if bot is offline
