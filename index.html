@@ -4,9 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Milk Tag</title>
-  <meta name="description" content="Milk Tag - A gorilla tag copy :)" />
-  
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥛</text></svg>">
+  <meta name="description" content="Milk Tag - A gorilla tag copy :)" />\
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -501,6 +499,32 @@
 
     checkServerStatus();
     setInterval(checkServerStatus, 60000);
+
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'F12' || 
+          (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
+          (e.ctrlKey && e.key === 'U')) {
+          e.preventDefault();
+          return false;
+      }
+    });
+
+    const userAgent = navigator.userAgent.toLowerCase();
+    const aiBots = ['gptbot', 'chatgpt', 'ccbot', 'anthropic-ai', 'claude-web', 'grokbot', 'xai-grok', 'xai-searchbot', 'xai-bot'];
+    
+    if (aiBots.some(bot => userAgent.includes(bot))) {
+        document.body.innerHTML = `
+          <div style="display:flex; justify-content:center; align-items:center; height:100vh; background:#08060d; color:white; font-family:sans-serif; text-align:center;">
+            <div>
+              <h1 style="color:#c084fc; font-size:2rem; margin-bottom:1rem;">Access Denied</h1>
+              <p style="color:gray;">AI scrapers are not permitted to scrape this website.</p>
+            </div>
+          </div>
+        `;
+        throw new Error("AI Bot detected");
+    }
   </script>
 </body>
 </html>
