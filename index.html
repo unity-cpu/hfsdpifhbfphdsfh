@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Milk Tag</title>
-  <meta name="description" content="Milk Tag - A gorilla tag copy :)" />\
+  <meta name="description" content="Milk Tag - A gorilla tag copy :)" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -127,29 +127,31 @@
       border-radius: 9999px;
       display: inline-block;
       flex-shrink: 0;
+      transition: background-color 0.3s;
     }
-    .status-dot.online {
-      background: #4ade80;
-      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
-      animation: statusPulse 2s infinite;
+    .status-dot.online { background: #4ade80; box-shadow: 0 0 8px rgba(74, 222, 128, 0.6); }
+    .status-dot.offline { background: #6b7280; }
+    .status-dot.idle { background: #fbbf24; }
+    .status-dot.dnd { background: #f87171; }
+
+    .staff-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-left: 4px;
+      background: #4b5563;
+      transition: background-color 0.3s;
     }
-    .status-dot.offline {
-      background: #f87171;
-      box-shadow: none;
-    }
-    .status-dot.maintenance {
-      background: #fbbf24;
-      box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
-      animation: statusPulse 2s infinite;
-    }
-    @keyframes statusPulse {
-      0%   { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
-      70%  { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
-    }
+    .staff-dot.online { background: #4ade80; box-shadow: 0 0 5px rgba(74, 222, 128, 0.8); }
+    .staff-dot.idle { background: #fbbf24; }
+    .staff-dot.dnd { background: #f87171; }
+    .staff-dot.offline { background: #4b5563; }
   </style>
 </head>
 <body class="bg-milk-950 text-white overflow-x-hidden antialiased">
+
+  <canvas id="snowCanvas" class="fixed inset-0 pointer-events-none z-[9999]"></canvas>
 
   <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
     <div class="orb w-[500px] h-[500px] bg-accent top-[-10%] left-[-10%]"></div>
@@ -263,43 +265,68 @@
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         <div class="card rounded-2xl p-8 text-center reveal">
           <h3 class="font-bold text-lg mb-1">Founders</h3>
-          <p class="text-accent text-sm font-medium">unity · milk · techno</p>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-2 flex-wrap">
+            <span class="flex items-center gap-1">unity <span id="dot-unity" class="staff-dot offline"></span></span> 
+            <span class="flex items-center gap-1">milk <span id="dot-milk" class="staff-dot offline"></span></span> 
+            <span class="flex items-center gap-1">techno <span id="dot-techno" class="staff-dot offline"></span></span>
+          </p>
           <p class="text-white/30 text-xs mt-2">Founder</p>
         </div>
 
         <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.05s">
           <h3 class="font-bold text-lg mb-1">Co Founders</h3>
-          <p class="text-accent text-sm font-medium">cat</p>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1">
+            cat <span id="dot-cat" class="staff-dot offline"></span>
+          </p>
           <p class="text-white/30 text-xs mt-2">Co Founder</p>
         </div>
 
         <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.1s">
           <h3 class="font-bold text-lg mb-1">Owners</h3>
-          <p class="text-accent text-sm font-medium">bunny · mrsandman</p>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-2 flex-wrap">
+            <span class="flex items-center gap-1">bunny <span id="dot-bunny" class="staff-dot offline"></span></span> 
+            <span class="flex items-center gap-1">mrsandman <span id="dot-mrsandman" class="staff-dot offline"></span></span>
+          </p>
           <p class="text-white/30 text-xs mt-2">Owner</p>
         </div>
 
         <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.15s">
           <h3 class="font-bold text-lg mb-1">Head Administrator</h3>
-          <p class="text-accent text-sm font-medium">awsomefrog</p>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1">
+            awsomefrog <span id="dot-awsomefrog" class="staff-dot offline"></span>
+          </p>
           <p class="text-white/30 text-xs mt-2">Head Admin</p>
         </div>
 
         <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.2s">
           <h3 class="font-bold text-lg mb-1">Administrators</h3>
-          <p class="text-accent text-sm font-medium">bumblebee · kiwi son · faded · wheather</p>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-2 flex-wrap">
+            <span class="flex items-center gap-1">bumblebee <span id="dot-bumblebee" class="staff-dot offline"></span></span> 
+            <span class="flex items-center gap-1">kiwi son <span id="dot-kiwison" class="staff-dot offline"></span></span> 
+            <span class="flex items-center gap-1">faded <span id="dot-faded" class="staff-dot offline"></span></span> 
+            <span class="flex items-center gap-1">wheather <span id="dot-wheather" class="staff-dot offline"></span></span>
+          </p>
           <p class="text-white/30 text-xs mt-2">Administrator</p>
         </div>
 
         <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.25s">
           <h3 class="font-bold text-lg mb-1">Head Moderator</h3>
-          <p class="text-accent text-sm font-medium">kinesi</p>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1">
+            kinesi <span id="dot-kinesi" class="staff-dot offline"></span>
+          </p>
           <p class="text-white/30 text-xs mt-2">Head Moderator</p>
         </div>
 
         <div class="card rounded-2xl p-8 text-center reveal sm:col-span-2 lg:col-span-3" style="transition-delay:0.3s">
           <h3 class="font-bold text-lg mb-1">Moderators</h3>
-          <p class="text-accent text-sm font-medium">kinesi · kiwi · why · wofa · rem · frosted</p>
+          <p class="text-accent text-sm font-medium flex items-center justify-center gap-2 flex-wrap">
+            <span class="flex items-center gap-1">kinesi <span id="dot-kinesi2" class="staff-dot offline"></span></span> 
+            <span class="flex items-center gap-1">kiwi <span id="dot-kiwi" class="staff-dot offline"></span></span> 
+            <span class="flex items-center gap-1">why <span id="dot-why" class="staff-dot offline"></span></span> 
+            <span class="flex items-center gap-1">wofa <span id="dot-wofa" class="staff-dot offline"></span></span> 
+            <span class="flex items-center gap-1">rem <span id="dot-rem" class="staff-dot offline"></span></span> 
+            <span class="flex items-center gap-1">frosted <span id="dot-frosted" class="staff-dot offline"></span></span>
+          </p>
           <p class="text-white/30 text-xs mt-2">Moderator</p>
         </div>
       </div>
@@ -400,10 +427,37 @@
   </footer>
 
   <script>
+    // ===== CONFIGURATION =====
     const SITE_LINKS = {
       download: 'https://www.meta.com/en-gb/experiences/milk-tag-v1/1329246086937107/', 
       discord:  'https://discord.gg/milktag',          
     };
+
+    // 👇 1. PUT YOUR PYTHON BOT'S URL HERE (e.g. https://mybot.up.railway.app/status) 👇
+    const BOT_API_URL = 'http://localhost:8080/status'; 
+
+    // 👇 2. PUT YOUR STAFF'S DISCORD IDS HERE (Right click profile -> Copy User ID) 👇
+    const STAFF_IDS = {
+      unity: "123456789012345678",
+      milk: "123456789012345678",
+      techno: "123456789012345678",
+      cat: "123456789012345678",
+      bunny: "123456789012345678",
+      mrsandman: "123456789012345678",
+      awsomefrog: "123456789012345678",
+      bumblebee: "123456789012345678",
+      kiwison: "123456789012345678",
+      faded: "123456789012345678",
+      wheather: "123456789012345678",
+      kinesi: "123456789012345678",
+      kiwi: "123456789012345678",
+      why: "123456789012345678",
+      wofa: "123456789012345678",
+      rem: "123456789012345678",
+      frosted: "123456789012345678"
+    };
+    // =========================
+
     document.getElementById('downloadBtn').href = SITE_LINKS.download;
     document.getElementById('discordBtn').href  = SITE_LINKS.discord;
 
@@ -462,6 +516,7 @@
 
     renderLeaderboard('ground');
 
+    // ===== Live Server Status (Cloudflare) =====
     const STATUS_ENDPOINT = 'https://withered-hill-1c9b.biggercreator22.workers.dev/';
 
     function paintStatus(status, message) {
@@ -500,8 +555,82 @@
     checkServerStatus();
     setInterval(checkServerStatus, 60000);
 
-    document.addEventListener('contextmenu', event => event.preventDefault());
+    // ===== Staff Discord Presence (Your Custom Python Bot) =====
+    async function fetchStaffStatus() {
+      try {
+        const res = await fetch(BOT_API_URL);
+        const data = await res.json(); 
+        // data looks like: { "123456789": "online", "987654321": "offline" }
 
+        for (const [name, id] of Object.entries(STAFF_IDS)) {
+          let status = data[id] || 'offline'; 
+          
+          const dot1 = document.getElementById(`dot-${name}`);
+          const dot2 = document.getElementById(`dot-${name}2`);
+          
+          if (dot1) dot1.className = `staff-dot ${status}`;
+          if (dot2) dot2.className = `staff-dot ${status}`;
+        }
+      } catch (err) {
+        // Silently fail if bot is offline
+      }
+    }
+
+    fetchStaffStatus();
+    setInterval(fetchStaffStatus, 30000);
+
+    // ===== Snowfall Background =====
+    const canvas = document.getElementById('snowCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 150; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 2.5 + 1,
+        speed: Math.random() * 1.5 + 0.5,
+        sway: Math.random() * 0.5 - 0.25,
+        swayOffset: Math.random() * Math.PI * 2
+      });
+    }
+
+    function animateSnow() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.beginPath();
+      
+      for (let p of particles) {
+        ctx.moveTo(p.x, p.y);
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        
+        p.y += p.speed;
+        p.x += Math.sin(p.swayOffset) * 0.5;
+        p.swayOffset += 0.02;
+
+        if (p.y > height) {
+          p.y = -10;
+          p.x = Math.random() * width;
+        }
+        if (p.x > width) p.x = 0;
+        if (p.x < 0) p.x = width;
+      }
+      
+      ctx.fill();
+      requestAnimationFrame(animateSnow);
+    }
+    animateSnow();
+
+    // ===== ANTI-INSPECT & ANTI-SCRAPE =====
+    document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', (e) => {
       if (e.key === 'F12' || 
           (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
