@@ -134,11 +134,15 @@
     .status-dot.idle { background: #fbbf24; }
     .status-dot.dnd { background: #f87171; }
 
+    /* Small dot for staff list */
     .staff-dot {
       width: 6px;
       height: 6px;
+      min-width: 6px;      /* Prevents squishing */
+      min-height: 6px;     /* Prevents squishing */
       border-radius: 50%;
       display: inline-block;
+      flex-shrink: 0;      /* Crucial fix for flex containers */
       margin-left: 4px;
       background: #4b5563;
       transition: background-color 0.3s;
