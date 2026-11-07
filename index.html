@@ -54,6 +54,18 @@
     .status-dot.offline { background: #6b7280; }
     .status-dot.idle { background: #fbbf24; }
     .status-dot.dnd { background: #f87171; }
+    .status-pill { --c: 107,114,128; color: rgb(var(--c)); background: rgba(var(--c), 0.10); border: 1px solid rgba(var(--c), 0.35);
+      backdrop-filter: blur(10px); transition: all 0.4s ease; }
+    .status-pill-lg { box-shadow: 0 0 40px rgba(var(--c), 0.15); }
+    .status-pill[data-status="online"] { --c: 74,222,128; }
+    .status-pill[data-status="maintenance"] { --c: 251,146,60; }
+    .status-pill[data-status="idle"] { --c: 251,191,36; }
+    .status-pill[data-status="dnd"], .status-pill[data-status="offline"] { --c: 248,113,113; }
+    .status-pill[data-status="offline"] { --c: 156,163,175; }
+    .status-dot { position: relative; }
+    .status-dot.online::after, .status-dot.maintenance::after { content:''; position:absolute; inset:0; border-radius:9999px; background: inherit; animation: ping 1.8s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes ping { 0% { transform: scale(1); opacity: 0.7; } 80%,100% { transform: scale(2.8); opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .status-dot::after { animation: none !important; } }
     .status-dot.maintenance { background: #fb923c; box-shadow: 0 0 8px rgba(251, 146, 60, 0.6); }
     @media (prefers-reduced-motion: reduce) {
       * { scroll-behavior: auto; }
@@ -84,7 +96,7 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/70">
+        <div class="status-pill hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold">
           <span id="navStatusDot" class="status-dot offline"></span>
           <span id="navStatusText">Checking…</span>
         </div>
@@ -97,7 +109,7 @@
     </div>
 
     <div id="mobileMenu" class="hidden md:hidden bg-milk-900/95 backdrop-blur-xl border-t border-white/5 px-6 py-5 space-y-4">
-      <div class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/70 w-fit">
+      <div class="status-pill flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold w-fit">
         <span id="mobileStatusDot" class="status-dot offline"></span>
         <span id="mobileStatusText">Checking…</span>
       </div>
@@ -125,7 +137,7 @@
         <a href="#discord" class="btn-ghost inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm">Join Discord</a>
       </div>
 
-      <div class="mt-8 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/60">
+      <div class="status-pill status-pill-lg mt-8 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-semibold">
         <span id="heroStatusDot" class="status-dot offline"></span>
         <span id="heroStatusText">Checking servers…</span>
       </div>
@@ -315,7 +327,7 @@
         .forEach(([dotId, textId]) => {
           const dot = document.getElementById(dotId);
           const text = document.getElementById(textId);
-          if (dot) dot.className = 'status-dot ' + status;
+          if (dot) { dot.className = 'status-dot ' + status; const pill = dot.closest('.status-pill'); if (pill) pill.dataset.status = status; }
           if (text) text.textContent = message || status;
         });
     }
