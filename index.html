@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Milk Tag</title>
-  <meta name="description" content="Milk Tag - A gorilla tag copy :)" />
+  <title>Unity Tag</title>
+  <meta name="description" content="Unity Tag - A gorilla tag copy :)" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -127,31 +127,12 @@
       border-radius: 9999px;
       display: inline-block;
       flex-shrink: 0;
-      transition: all 0.3s ease;
+      transition: background-color 0.3s;
     }
-    .status-dot-lg {
-      width: 12px;
-      height: 12px;
-    }
-    .status-dot.online {
-      background: #4ade80;
-      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
-      animation: statusPulse 2s infinite;
-    }
-    .status-dot.offline {
-      background: #f87171;
-      box-shadow: none;
-    }
-    .status-dot.maintenance {
-      background: #fbbf24;
-      box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
-      animation: statusPulse 2s infinite;
-    }
-    @keyframes statusPulse {
-      0%   { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
-      70%  { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
-    }
+    .status-dot.online { background: #4ade80; box-shadow: 0 0 8px rgba(74, 222, 128, 0.6); }
+    .status-dot.offline { background: #6b7280; }
+    .status-dot.idle { background: #fbbf24; }
+    .status-dot.dnd { background: #f87171; }
   </style>
 </head>
 <body class="bg-milk-950 text-white overflow-x-hidden antialiased">
@@ -167,7 +148,7 @@
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <div class="leading-none">
-          <div class="font-bold text-[15px] tracking-wide">MILK<span class="text-accent">TAG</span></div>
+          <div class="font-bold text-[15px] tracking-wide">UNITY<span class="text-accent">TAG</span></div>
         </div>
 
       <div class="hidden md:flex items-center gap-8 text-[13px] font-medium text-white/70">
@@ -179,8 +160,7 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <!-- NOTICEABLE NAVBAR STATUS -->
-        <div id="navStatusContainer" class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/70 transition-all duration-300">
+        <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/70">
           <span id="navStatusDot" class="status-dot offline"></span>
           <span id="navStatusText">Checking…</span>
         </div>
@@ -195,7 +175,7 @@
     </div>
 
     <div id="mobileMenu" class="hidden md:hidden bg-milk-900/95 backdrop-blur-xl border-t border-white/5 px-6 py-5 space-y-4">
-      <div id="mobileStatusContainer" class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/70 w-fit transition-all duration-300">
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/70 w-fit">
         <span id="mobileStatusDot" class="status-dot offline"></span>
         <span id="mobileStatusText">Checking…</span>
       </div>
@@ -215,7 +195,7 @@
       </div>
 
       <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-[0.95] tracking-tight mb-6">
-        <span class="text-white">milk tag</span><br>
+        <span class="text-white">unity tag</span><br>
       </h1>
 
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
@@ -228,13 +208,12 @@
         </a>
       </div>
 
-      <!-- SUPER NOTICEABLE HERO STATUS -->
-      <div id="heroStatusContainer" class="mt-12 inline-flex items-center gap-3 px-6 py-3 rounded-2xl border-2 border-white/10 bg-white/5 text-sm sm:text-base font-semibold text-white/70 transition-all duration-500 shadow-lg">
-        <span id="heroStatusDot" class="status-dot status-dot-lg offline"></span>
+      <div class="mt-8 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/60">
+        <span id="heroStatusDot" class="status-dot offline"></span>
         <span id="heroStatusText">Checking servers…</span>
       </div>
 
-      <p class="mt-10 text-[11px] text-white/30 tracking-widest uppercase">
+      <p class="mt-12 text-[11px] text-white/30 tracking-widest uppercase">
         get the game boyo
       </p>
     </div>
@@ -257,96 +236,6 @@
             patched the apks and fixed the servers.
           </p>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="staff" class="relative py-28 px-6">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-16 reveal">
-        <p class="text-accent text-xs font-medium tracking-widest uppercase mb-3">The Team</p>
-        <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Staff</h2>
-        <p class="text-white/40 mt-3 text-sm">the people who keep Milk Tag running</p>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div class="card rounded-2xl p-8 text-center reveal">
-          <h3 class="font-bold text-lg mb-1">Founders</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5 flex-wrap">
-            <span>unity</span> 
-            <span class="text-white/20 px-1">|</span>
-            <span>milk</span> 
-            <span class="text-white/20 px-1">|</span>
-            <span>techno</span>
-          </p>
-          <p class="text-white/30 text-xs mt-2">Founder</p>
-        </div>
-
-        <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.05s">
-          <h3 class="font-bold text-lg mb-1">Co Founders</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5">
-            <span>cat</span>
-          </p>
-          <p class="text-white/30 text-xs mt-2">Co Founder</p>
-        </div>
-
-        <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.1s">
-          <h3 class="font-bold text-lg mb-1">Owners</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5 flex-wrap">
-            <span>bunny</span> 
-            <span class="text-white/20 px-1">|</span>
-            <span>mrsandman</span>
-          </p>
-          <p class="text-white/30 text-xs mt-2">Owner</p>
-        </div>
-
-        <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.15s">
-          <h3 class="font-bold text-lg mb-1">Head Administrator</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5">
-            <span>awsomefrog</span>
-          </p>
-          <p class="text-white/30 text-xs mt-2">Head Admin</p>
-        </div>
-
-        <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.2s">
-          <h3 class="font-bold text-lg mb-1">Administrators</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5 flex-wrap">
-            <span>bumblebee</span> 
-            <span class="text-white/20 px-1">|</span>
-            <span>kiwi son</span> 
-            <span class="text-white/20 px-1">|</span>
-            <span>faded</span> 
-            <span class="text-white/20 px-1">|</span>
-            <span>wheather</span>
-          </p>
-          <p class="text-white/30 text-xs mt-2">Administrator</p>
-        </div>
-
-        <div class="card rounded-2xl p-8 text-center reveal" style="transition-delay:0.25s">
-          <h3 class="font-bold text-lg mb-1">Head Moderator</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5">
-            <span>kinesi</span>
-          </p>
-          <p class="text-white/30 text-xs mt-2">Head Moderator</p>
-        </div>
-
-        <div class="card rounded-2xl p-8 text-center reveal sm:col-span-2 lg:col-span-3" style="transition-delay:0.3s">
-          <h3 class="font-bold text-lg mb-1">Moderators</h3>
-          <p class="text-accent text-sm font-medium flex items-center justify-center gap-1.5 flex-wrap">
-            <span>kinesi</span> 
-            <span class="text-white/20 px-1">|</span>
-            <span>kiwi</span> 
-            <span class="text-white/20 px-1">|</span>
-            <span>why</span> 
-            <span class="text-white/20 px-1">|</span>
-            <span>wofa</span> 
-            <span class="text-white/20 px-1">|</span>
-            <span>rem</span> 
-            <span class="text-white/20 px-1">|</span>
-            <span>frosted</span>
-          </p>
-          <p class="text-white/30 text-xs mt-2">Moderator</p>
-        </div>
       </div>
     </div>
   </section>
@@ -431,11 +320,11 @@
           <path d="M13 25c2 3 5 4.5 7 4.5s5-1.5 7-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
         <div>
-          <div class="font-bold text-sm tracking-wide">MILK<span class="text-accent">TAG</span></div>
+          <div class="font-bold text-sm tracking-wide">UNITY<span class="text-accent">TAG</span></div>
         </div>
       </div>
       <p class="text-white/25 text-xs text-center">
-        © 2026 Milk Tag
+        © 2026 Unity Tag
       </p>
       <div class="flex gap-5 text-sm text-white/40">
         <a href="#discord" class="hover:text-accent transition">Discord</a>
@@ -445,10 +334,19 @@
   </footer>
 
   <script>
+    // ===== CONFIGURATION =====
     const SITE_LINKS = {
-      download: 'https://www.meta.com/en-gb/experiences/milk-tag-v1/1329246086937107/', 
-      discord:  'https://discord.gg/milktag',          
+      download: 'https://www.meta.com/en-gb/experiences/project-unity/34066458553001108/', 
+      discord:  'https://discord.gg/unitytag',          
     };
+
+    // 👇 1. PUT YOUR PYTHON BOT'S URL HERE 👇
+    // If testing on your PC, use: 'http://localhost:8080/status'
+    // If hosting on Render/Railway, use your link: 'https://your-bot.onrender.com/status'
+    const BOT_API_URL = 'http://localhost:8080/status'; 
+
+    // 👇 2. YOUR STAFF'S DISCORD IDS 👇
+    // =========================
 
     document.getElementById('downloadBtn').href = SITE_LINKS.download;
     document.getElementById('discordBtn').href  = SITE_LINKS.discord;
@@ -472,10 +370,10 @@
     reveals.forEach(el => observer.observe(el));
 
     const leaderboards = {
-      ground: ['unity', 'Bubblegumjr', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one'],
+      ground: ['unity', 'none', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one'],
       walls: ['no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one'],
       branches: ['no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one'],
-      slipslap: ['frog', 'sot', 'cat', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one']
+      slipslap: ['no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one', 'no one']
     };
 
     function renderLeaderboard(mode) {
@@ -508,39 +406,22 @@
 
     renderLeaderboard('ground');
 
+    // ===== Live Server Status (Cloudflare) =====
     const STATUS_ENDPOINT = 'https://withered-hill-1c9b.biggercreator22.workers.dev/';
 
     function paintStatus(status, message) {
       const targets = [
-        { dot: 'navStatusDot', text: 'navStatusText', container: 'navStatusContainer' },
-        { dot: 'heroStatusDot', text: 'heroStatusText', container: 'heroStatusContainer' },
-        { dot: 'mobileStatusDot', text: 'mobileStatusText', container: 'mobileStatusContainer' }
+        ['navStatusDot', 'navStatusText'],
+        ['heroStatusDot', 'heroStatusText'],
+        ['mobileStatusDot', 'mobileStatusText'],
       ];
       const label = message || status;
 
-      targets.forEach(target => {
-        const dot = document.getElementById(target.dot);
-        const text = document.getElementById(target.text);
-        const container = document.getElementById(target.container);
-        
-        if (dot) dot.className = 'status-dot ' + (target.dot === 'heroStatusDot' ? 'status-dot-lg ' : '') + status;
+      targets.forEach(([dotId, textId]) => {
+        const dot = document.getElementById(dotId);
+        const text = document.getElementById(textId);
+        if (dot) dot.className = 'status-dot ' + status;
         if (text) text.textContent = label;
-
-        if (container) {
-          // Remove old background/border classes
-          container.classList.remove('bg-white/5', 'border-white/10', 'bg-green-500/10', 'border-green-500/30', 'text-green-400', 'shadow-[0_0_15px_rgba(74,222,128,0.2)]', 'bg-red-500/10', 'border-red-500/30', 'text-red-400', 'shadow-[0_0_15px_rgba(248,113,113,0.2)]', 'bg-amber-500/10', 'border-amber-500/30', 'text-amber-400', 'shadow-[0_0_15px_rgba(251,191,36,0.2)]');
-          
-          // Apply new classes based on status
-          if (status === 'online') {
-            container.classList.add('bg-green-500/10', 'border-green-500/30', 'text-green-400', 'shadow-[0_0_15px_rgba(74,222,128,0.2)]');
-          } else if (status === 'offline') {
-            container.classList.add('bg-red-500/10', 'border-red-500/30', 'text-red-400', 'shadow-[0_0_15px_rgba(248,113,113,0.2)]');
-          } else if (status === 'maintenance') {
-            container.classList.add('bg-amber-500/10', 'border-amber-500/30', 'text-amber-400', 'shadow-[0_0_15px_rgba(251,191,36,0.2)]');
-          } else {
-            container.classList.add('bg-white/5', 'border-white/10', 'text-white/70');
-          }
-        }
       });
     }
 
@@ -564,6 +445,38 @@
     checkServerStatus();
     setInterval(checkServerStatus, 60000);
 
+    // ===== Staff Discord Presence (Your Custom Python Bot) =====
+    async function fetchStaffStatus() {
+      try {
+        const res = await fetch(BOT_API_URL);
+        const data = await res.json(); 
+
+        for (const [name, id] of Object.entries(STAFF_IDS)) {
+          let status = data[id] || 'offline'; 
+          
+          // Choose color based on status
+          let colorClasses = 'bg-gray-500'; // offline
+          if (status === 'online') colorClasses = 'bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.8)]';
+          else if (status === 'idle') colorClasses = 'bg-yellow-400';
+          else if (status === 'dnd') colorClasses = 'bg-red-400';
+
+          const baseClasses = 'w-2 h-2 rounded-full inline-block flex-shrink-0';
+          
+          const dot1 = document.getElementById(`dot-${name}`);
+          const dot2 = document.getElementById(`dot-${name}2`);
+          
+          if (dot1) dot1.className = `${baseClasses} ${colorClasses}`;
+          if (dot2) dot2.className = `${baseClasses} ${colorClasses}`;
+        }
+      } catch (err) {
+        // Silently fail if bot is offline
+      }
+    }
+
+    fetchStaffStatus();
+    setInterval(fetchStaffStatus, 30000);
+
+    // ===== Snowfall Background =====
     const canvas = document.getElementById('snowCanvas');
     const ctx = canvas.getContext('2d');
     let width, height;
@@ -613,6 +526,7 @@
     }
     animateSnow();
 
+    // ===== ANTI-INSPECT & ANTI-SCRAPE =====
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', (e) => {
       if (e.key === 'F12' || 
