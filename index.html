@@ -67,6 +67,62 @@
     @keyframes ping { 0% { transform: scale(1); opacity: 0.7; } 80%,100% { transform: scale(2.8); opacity: 0; } }
     @media (prefers-reduced-motion: reduce) { .status-dot::after { animation: none !important; } }
     .status-dot.maintenance { background: #fb923c; box-shadow: 0 0 8px rgba(251, 146, 60, 0.6); }
+    body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+      background-image: linear-gradient(rgba(192,132,252,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(192,132,252,0.05) 1px, transparent 1px);
+      background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%); }
+    section, footer { position: relative; z-index: 1; }
+    .orb { animation: float 14s ease-in-out infinite; }
+    .orb:nth-child(2) { animation-delay: -5s; } .orb:nth-child(3) { animation-delay: -9s; }
+    @keyframes float { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-40px) scale(1.08); } }
+    .grad-text { background: linear-gradient(120deg, #fff 10%, #e9d5ff 40%, #c084fc 75%, #a855f7); -webkit-background-clip: text; background-clip: text; color: transparent;
+      filter: drop-shadow(0 0 40px rgba(192,132,252,0.35)); }
+    .card { backdrop-filter: blur(14px); background: linear-gradient(160deg, rgba(30,23,41,0.75), rgba(16,12,24,0.75)); position: relative; }
+    .card::before { content:''; position:absolute; top:0; left:12%; right:12%; height:1px; background: linear-gradient(90deg, transparent, rgba(192,132,252,0.7), transparent); }
+    .btn-primary { position: relative; overflow: hidden; box-shadow: 0 8px 24px rgba(192,132,252,0.25); }
+    .btn-primary::after { content:''; position:absolute; top:0; left:-120%; width:60%; height:100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,0.45), transparent); transition: left 0.6s ease; }
+    .btn-primary:hover::after { left:140%; }
+    .section-title::after { content:''; display:block; width:48px; height:3px; margin:16px auto 0; border-radius:3px; background: linear-gradient(90deg, #c084fc, #a855f7); }
+    .lb-row.r1 { background: linear-gradient(90deg, rgba(192,132,252,0.14), transparent); }
+    .lb-row.r2 { background: linear-gradient(90deg, rgba(255,255,255,0.06), transparent); }
+    .lb-row.r3 { background: linear-gradient(90deg, rgba(251,146,60,0.10), transparent); }
+    .rank-badge { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:9999px; font-size:13px; font-weight:700; color:rgba(255,255,255,0.35); }
+    .rank-badge.top { border:1px solid currentColor; }
+    .rank-badge.r1 { color:#c084fc; background:rgba(192,132,252,0.15); box-shadow:0 0 16px rgba(192,132,252,0.35); }
+    .rank-badge.r2 { color:#d1d5db; background:rgba(209,213,219,0.10); }
+    .rank-badge.r3 { color:#fb923c; background:rgba(251,146,60,0.12); }
+    ::selection { background: rgba(192,132,252,0.35); color:#fff; }
+    :focus-visible { outline: 2px solid #c084fc; outline-offset: 3px; border-radius: 8px; }
+    .grad-text { background-size: 200% auto; animation: shimmer 8s linear infinite; }
+    @keyframes shimmer { to { background-position: 200% center; } }
+    .hero-glow { position:absolute; left:50%; top:46%; width:min(900px,95vw); height:520px; transform:translate(-50%,-50%); z-index:0; pointer-events:none;
+      background: radial-gradient(ellipse at center, rgba(168,85,247,0.28), rgba(192,132,252,0.08) 45%, transparent 70%); filter: blur(10px); }
+    .card::after { content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .4s;
+      background: radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(192,132,252,0.14), transparent 60%); }
+    .card:hover::after { opacity:1; }
+    #download .card { border-color: rgba(192,132,252,0.3); box-shadow: 0 0 60px rgba(168,85,247,0.12), inset 0 1px 0 rgba(255,255,255,0.05); }
+    .divider { height:1px; max-width:720px; margin:0 auto; background: linear-gradient(90deg, transparent, rgba(192,132,252,0.3), transparent); }
+    footer { background: linear-gradient(to top, rgba(168,85,247,0.07), transparent); }
+    .lb-tab { transition: all .25s ease; } .lb-tab.active { box-shadow: 0 0 20px rgba(192,132,252,0.2); }
+    .eyebrow { display:inline-block; padding:4px 12px; border-radius:9999px; background:rgba(192,132,252,0.08); border:1px solid rgba(192,132,252,0.2); }
+    #progress { position:fixed; top:0; left:0; height:2px; width:0; z-index:60; background:linear-gradient(90deg,#a855f7,#e9d5ff); box-shadow:0 0 12px rgba(192,132,252,0.8); }
+    .nav-link.active { color:#fff; } .nav-link.active::after { width:100%; }
+    .step-num { width:44px; height:44px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px; color:#c084fc;
+      background:linear-gradient(135deg, rgba(192,132,252,0.2), rgba(168,85,247,0.05)); border:1px solid rgba(192,132,252,0.3); }
+    @media (prefers-reduced-motion: reduce) { .grad-text { animation: none; } }
+    @keyframes rise { from { opacity:0; transform: translateY(24px); filter: blur(6px); } to { opacity:1; transform:none; filter:none; } }
+    #home .relative > * { animation: rise 1s cubic-bezier(0.16,1,0.3,1) both; }
+    #home .relative > *:nth-child(2) { animation-delay:.1s; } #home .relative > *:nth-child(3) { animation-delay:.2s; }
+    #home .relative > *:nth-child(4) { animation-delay:.3s; } #home .relative > *:nth-child(5) { animation-delay:.4s; } #home .relative > *:nth-child(6) { animation-delay:.5s; }
+    #download .card::before { left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, #c084fc, #a855f7, #c084fc, transparent); background-size:200% auto; animation: shimmer 4s linear infinite; }
+    .btn-primary svg, .btn-ghost svg { transition: transform .3s ease; } .btn-primary:hover svg { transform: translate(3px,-3px); }
+    nav .btn-ghost, nav a.border-accent\/40 { backdrop-filter: blur(10px); }
+    .lb-row .empty { color: rgba(255,255,255,0.22); font-style: italic; }
+    .lb-row .name { color:#fff; }
+    @media (prefers-reduced-motion: reduce) { #home .relative > *, #download .card::before { animation: none; } }
+    .news-accent { border-left: 3px solid #c084fc; }
+    .scroll-hint { animation: bob 2s ease-in-out infinite; }
+    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+    @media (prefers-reduced-motion: reduce) { .orb, .scroll-hint { animation: none; } }
     @media (prefers-reduced-motion: reduce) {
       * { scroll-behavior: auto; }
       .reveal { transition: none; }
@@ -75,6 +131,7 @@
   <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
 </head>
 <body class="bg-milk-950 text-white overflow-x-hidden antialiased">
+  <div id="progress" aria-hidden="true"></div>
 
   <canvas id="snowCanvas" class="fixed inset-0 pointer-events-none z-[9999]" aria-hidden="true"></canvas>
 
@@ -86,9 +143,10 @@
 
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <div class="font-bold text-[15px] tracking-wide">UNITY<span class="text-accent">TAG</span></div>
+      <div class="flex items-center gap-2 font-bold text-[15px] tracking-wide"><span class="w-2.5 h-2.5 rotate-45 bg-accent rounded-sm shadow-[0_0_12px_#c084fc]"></span>UNITY<span class="text-accent -ml-1.5">TAG</span></div>
 
       <div class="hidden md:flex items-center gap-8 text-[13px] font-medium text-white/70">
+        <a href="#how" class="nav-link hover:text-white transition">How to play</a>
         <a href="#news" class="nav-link hover:text-white transition">News</a>
         <a href="#leaderboard" class="nav-link hover:text-white transition">Leaderboard</a>
         <a href="#download" class="nav-link hover:text-white transition">Download</a>
@@ -104,7 +162,7 @@
           Get in the game
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </a>
-        <button id="menuBtn" class="md:hidden text-accent text-xl" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+        <button id="menuBtn" class="md:hidden text-accent text-xl" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
     </div>
 
@@ -113,6 +171,7 @@
         <span id="mobileStatusDot" class="status-dot offline"></span>
         <span id="mobileStatusText">Checking…</span>
       </div>
+      <a href="#how" class="block text-white/80 hover:text-accent">How to play</a>
       <a href="#news" class="block text-white/80 hover:text-accent">News</a>
       <a href="#leaderboard" class="block text-white/80 hover:text-accent">Leaderboard</a>
       <a href="#download" class="block text-white/80 hover:text-accent">Download</a>
@@ -120,14 +179,16 @@
     </div>
   </nav>
 
-  <section id="home" class="relative min-h-screen flex items-center justify-center pt-16">
+  <section id="home" class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
       <div class="inline-flex items-center gap-2 mb-8 px-3 py-1 rounded-full border border-accent/20 bg-accent/5 text-accent text-xs font-medium tracking-wide">
         <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
         made by unity
       </div>
 
-      <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-[0.95] tracking-tight mb-10">unity tag</h1>
+      <h1 class="grad-text text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold leading-[0.95] tracking-tighter mb-6 pb-2">unity tag</h1>
+      <p class="text-white/50 text-base sm:text-lg max-w-md mx-auto mb-10">A VR tag game for Meta Quest. Jump in and start chasing.</p>
 
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
         <a href="#download" class="btn-primary inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm">
@@ -143,17 +204,37 @@
       </div>
 
       <p class="mt-12 text-[11px] text-white/30 tracking-widest uppercase">get the game boyo</p>
+      <a href="#news" aria-label="Scroll down" class="scroll-hint inline-block mt-8 text-accent/60 hover:text-accent">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></a>
     </div>
   </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <section id="how" class="relative py-28 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="eyebrow text-accent text-xs font-semibold tracking-widest uppercase mb-4">Quick start</p>
+        <h2 class="section-title text-4xl sm:text-5xl font-extrabold tracking-tight">How to play</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="card rounded-2xl p-8 reveal"><div class="step-num mb-5">1</div><h3 class="font-bold text-lg mb-2">Get the game</h3><p class="text-white/45 text-sm leading-relaxed">Download Unity Tag on your Meta Quest from the download section below.</p></div>
+        <div class="card rounded-2xl p-8 reveal" style="transition-delay:0.1s"><div class="step-num mb-5">2</div><h3 class="font-bold text-lg mb-2">Check the servers</h3><p class="text-white/45 text-sm leading-relaxed">The status badge at the top tells you whether the servers are online or under maintenance.</p></div>
+        <div class="card rounded-2xl p-8 reveal" style="transition-delay:0.2s"><div class="step-num mb-5">3</div><h3 class="font-bold text-lg mb-2">Find players</h3><p class="text-white/45 text-sm leading-relaxed">Join the Discord to meet other players, get updates first and talk to the staff.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
 
   <section id="news" class="relative py-28 px-6">
     <div class="max-w-3xl mx-auto">
       <div class="text-center mb-16 reveal">
-        <p class="text-accent text-xs font-medium tracking-widest uppercase mb-3">Updates</p>
-        <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">News</h2>
+        <p class="eyebrow text-accent text-xs font-semibold tracking-widest uppercase mb-4">Updates</p>
+        <h2 class="section-title text-4xl sm:text-5xl font-extrabold tracking-tight">News</h2>
       </div>
 
-      <article class="card rounded-2xl p-6 sm:p-8 reveal" style="transition-delay:0.08s">
+      <article class="card news-accent rounded-2xl p-6 sm:p-8 reveal" style="transition-delay:0.08s">
         <div class="flex items-center gap-3 mb-3">
           <span class="px-2.5 py-1 rounded-md bg-blue-500/15 text-blue-400 text-[11px] font-semibold tracking-wide">PATCH</span>
           <span class="text-white/30 text-xs">Oct 28, 2026</span>
@@ -164,11 +245,13 @@
     </div>
   </section>
 
+  <div class="divider" aria-hidden="true"></div>
+
   <section id="leaderboard" class="relative py-28 px-6">
     <div class="max-w-3xl mx-auto">
       <div class="text-center mb-10 reveal">
-        <p class="text-accent text-xs font-medium tracking-widest uppercase mb-3">Rankings</p>
-        <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Leaderboard</h2>
+        <p class="eyebrow text-accent text-xs font-semibold tracking-widest uppercase mb-4">Rankings</p>
+        <h2 class="section-title text-4xl sm:text-5xl font-extrabold tracking-tight">Leaderboard</h2>
         <p class="text-white/40 mt-3 text-sm">Top 10</p>
       </div>
 
@@ -189,11 +272,13 @@
     </div>
   </section>
 
+  <div class="divider" aria-hidden="true"></div>
+
   <section id="download" class="relative py-28 px-6">
     <div class="max-w-xl mx-auto">
       <div class="text-center mb-12 reveal">
-        <p class="text-accent text-xs font-medium tracking-widest uppercase mb-3">Get Started</p>
-        <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Download</h2>
+        <p class="eyebrow text-accent text-xs font-semibold tracking-widest uppercase mb-4">Get Started</p>
+        <h2 class="section-title text-4xl sm:text-5xl font-extrabold tracking-tight">Download</h2>
       </div>
 
       <div class="card rounded-2xl p-10 text-center reveal">
@@ -209,6 +294,8 @@
       </div>
     </div>
   </section>
+
+  <div class="divider" aria-hidden="true"></div>
 
   <section id="discord" class="relative py-28 px-6">
     <div class="max-w-3xl mx-auto">
@@ -274,6 +361,25 @@
     menuBtn.addEventListener('click', () => setMenu(mobileMenu.classList.contains('hidden')));
     mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
 
+    // ===== Scroll progress + active nav =====
+    const progress = document.getElementById('progress');
+    window.addEventListener('scroll', () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    }, { passive: true });
+    const navLinks = document.querySelectorAll('.nav-link');
+    const secObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('section[id]').forEach(sec => secObserver.observe(sec));
+
+    // ===== Card spotlight =====
+    document.querySelectorAll('.card').forEach(c => c.addEventListener('pointermove', e => {
+      const r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }));
+
     // ===== Reveal on scroll =====
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
@@ -302,9 +408,9 @@
         if (rank === 1) rankClass = 'text-accent font-bold';
         else if (rank === 2) rankClass = 'text-white/60 font-bold';
         else if (rank === 3) rankClass = 'text-orange-400/80 font-bold';
-        return `<div class="lb-row grid grid-cols-12 gap-2 px-6 py-3.5 items-center transition">
-          <div class="col-span-2 ${rankClass}">#${rank}</div>
-          <div class="col-span-10 flex items-center"><span class="font-medium text-sm">${escapeHTML(name)}</span></div>
+        return `<div class="lb-row r${rank} grid grid-cols-12 gap-2 px-6 py-3.5 items-center transition">
+          <div class="col-span-2"><span class="rank-badge ${rank<=3?'top':''} r${rank}">${rank}</span></div>
+          <div class="col-span-10 flex items-center"><span class="font-medium text-sm ${name === 'no one' || name === 'none' ? 'empty' : 'name'}">${escapeHTML(name)}</span></div>
         </div>`;
       }).join('');
     }
