@@ -127,6 +127,11 @@
       border-radius: 9999px;
       display: inline-block;
       flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+    .status-dot-lg {
+      width: 12px;
+      height: 12px;
     }
     .status-dot.online {
       background: #4ade80;
@@ -174,7 +179,8 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/70">
+        <!-- NOTICEABLE NAVBAR STATUS -->
+        <div id="navStatusContainer" class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/70 transition-all duration-300">
           <span id="navStatusDot" class="status-dot offline"></span>
           <span id="navStatusText">Checking…</span>
         </div>
@@ -189,7 +195,7 @@
     </div>
 
     <div id="mobileMenu" class="hidden md:hidden bg-milk-900/95 backdrop-blur-xl border-t border-white/5 px-6 py-5 space-y-4">
-      <div class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/70 w-fit">
+      <div id="mobileStatusContainer" class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/70 w-fit transition-all duration-300">
         <span id="mobileStatusDot" class="status-dot offline"></span>
         <span id="mobileStatusText">Checking…</span>
       </div>
@@ -222,12 +228,13 @@
         </a>
       </div>
 
-      <div class="mt-8 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/60">
-        <span id="heroStatusDot" class="status-dot offline"></span>
+      <!-- SUPER NOTICEABLE HERO STATUS -->
+      <div id="heroStatusContainer" class="mt-12 inline-flex items-center gap-3 px-6 py-3 rounded-2xl border-2 border-white/10 bg-white/5 text-sm sm:text-base font-semibold text-white/70 transition-all duration-500 shadow-lg">
+        <span id="heroStatusDot" class="status-dot status-dot-lg offline"></span>
         <span id="heroStatusText">Checking servers…</span>
       </div>
 
-      <p class="mt-12 text-[11px] text-white/30 tracking-widest uppercase">
+      <p class="mt-10 text-[11px] text-white/30 tracking-widest uppercase">
         get the game boyo
       </p>
     </div>
@@ -505,17 +512,35 @@
 
     function paintStatus(status, message) {
       const targets = [
-        ['navStatusDot', 'navStatusText'],
-        ['heroStatusDot', 'heroStatusText'],
-        ['mobileStatusDot', 'mobileStatusText'],
+        { dot: 'navStatusDot', text: 'navStatusText', container: 'navStatusContainer' },
+        { dot: 'heroStatusDot', text: 'heroStatusText', container: 'heroStatusContainer' },
+        { dot: 'mobileStatusDot', text: 'mobileStatusText', container: 'mobileStatusContainer' }
       ];
       const label = message || status;
 
-      targets.forEach(([dotId, textId]) => {
-        const dot = document.getElementById(dotId);
-        const text = document.getElementById(textId);
-        if (dot) dot.className = 'status-dot ' + status;
+      targets.forEach(target => {
+        const dot = document.getElementById(target.dot);
+        const text = document.getElementById(target.text);
+        const container = document.getElementById(target.container);
+        
+        if (dot) dot.className = 'status-dot ' + (target.dot === 'heroStatusDot' ? 'status-dot-lg ' : '') + status;
         if (text) text.textContent = label;
+
+        if (container) {
+          // Remove old background/border classes
+          container.classList.remove('bg-white/5', 'border-white/10', 'bg-green-500/10', 'border-green-500/30', 'text-green-400', 'shadow-[0_0_15px_rgba(74,222,128,0.2)]', 'bg-red-500/10', 'border-red-500/30', 'text-red-400', 'shadow-[0_0_15px_rgba(248,113,113,0.2)]', 'bg-amber-500/10', 'border-amber-500/30', 'text-amber-400', 'shadow-[0_0_15px_rgba(251,191,36,0.2)]');
+          
+          // Apply new classes based on status
+          if (status === 'online') {
+            container.classList.add('bg-green-500/10', 'border-green-500/30', 'text-green-400', 'shadow-[0_0_15px_rgba(74,222,128,0.2)]');
+          } else if (status === 'offline') {
+            container.classList.add('bg-red-500/10', 'border-red-500/30', 'text-red-400', 'shadow-[0_0_15px_rgba(248,113,113,0.2)]');
+          } else if (status === 'maintenance') {
+            container.classList.add('bg-amber-500/10', 'border-amber-500/30', 'text-amber-400', 'shadow-[0_0_15px_rgba(251,191,36,0.2)]');
+          } else {
+            container.classList.add('bg-white/5', 'border-white/10', 'text-white/70');
+          }
+        }
       });
     }
 
