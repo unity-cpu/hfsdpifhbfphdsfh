@@ -127,12 +127,26 @@
       border-radius: 9999px;
       display: inline-block;
       flex-shrink: 0;
-      transition: background-color 0.3s;
     }
-    .status-dot.online { background: #4ade80; box-shadow: 0 0 8px rgba(74, 222, 128, 0.6); }
-    .status-dot.offline { background: #6b7280; }
-    .status-dot.idle { background: #fbbf24; }
-    .status-dot.dnd { background: #f87171; }
+    .status-dot.online {
+      background: #4ade80;
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+      animation: statusPulse 2s infinite;
+    }
+    .status-dot.offline {
+      background: #f87171;
+      box-shadow: none;
+    }
+    .status-dot.maintenance {
+      background: #fbbf24;
+      box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
+      animation: statusPulse 2s infinite;
+    }
+    @keyframes statusPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
+      70%  { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+    }
   </style>
 </head>
 <body class="bg-milk-950 text-white overflow-x-hidden antialiased">
@@ -439,12 +453,12 @@
 
     // 👇 1. PUT YOUR PYTHON BOT'S URL HERE 👇
     // If testing on your PC, use: 'http://localhost:8080/status'
-    // If hosting on Render/Railway, use your link: 'https://your-bot.onrender.com/status'
-    const BOT_API_URL = 'https://milk-tag-bot.onrender.com/status';
+    // If hosting on Render, use your link: 'https://your-bot.onrender.com/status'
+    const BOT_API_URL = 'http://localhost:8080/status'; 
 
     // 👇 2. YOUR STAFF'S DISCORD IDS 👇
     const STAFF_IDS = {
-    unity: "1443807588864098316",
+    unity: "739492035555491841",
     milk: "1238518459613188106",
     techno: "762307715648716800",
     cat: "969635739627311184",
